@@ -3,56 +3,278 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil Interativo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap05.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Meu Perfil</title>
+
+    <!-- Link do Bootstrap para estilos -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Estilo para o corpo da página */
+        body {
+            background-color: #f8f0f8;  /* Fundo suave rosa claro */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #6c757d;  /* Texto em cinza suave */
+        }
+
+        /* Estilo para o card do perfil */
+        #profileCard {
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border: 2px solid #f5c6cb; /* Bordas em tom de rosa */
+        }
+
+        #profileCard:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Estilo da imagem de perfil */
+        #profileImage {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        #profileImage:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+
+        /* Estilo dos botões */
+        .btn {
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Botões com tons de rosa */
+        .btn-primary {
+            background-color: #e83e8c; /* Rosa escuro */
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #c82333; /* Rosa mais intenso */
+        }
+
+        .btn-success {
+            background-color: #d1ecf1; /* Rosa claro */
+            border: none;
+        }
+
+        .btn-success:hover {
+            background-color: #bee5eb;
+        }
+
+        .btn-warning {
+            background-color: #f9d6e2; /* Rosa claro pastel */
+            border: none;
+        }
+
+        .btn-warning:hover {
+            background-color: #f8b8d2;
+        }
+
+        .btn-info {
+            background-color: #f5c6cb; /* Rosa pastel */
+            border: none;
+        }
+
+        .btn-info:hover {
+            background-color: #f1a6b1;
+        }
+
+        .btn-danger {
+            background-color: #f44336; /* Vermelho rosado */
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background-color: #e03131;
+        }
+
+        /* Estilo para os hobbies */
+        #hobbiesList {
+            text-align: left;
+            padding-left: 20px;
+            margin-top: 20px;
+        }
+
+        .list-group-item {
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .list-group-item:hover {
+            background-color: #f1d1db; /* Cor suave de fundo ao passar o mouse */
+        }
+
+        /* Estilo do título */
+        h3, h5 {
+            font-weight: 700;
+            color: #f08c8c; /* Cor de texto rosinha */
+        }
+
+        .mt-3 {
+            margin-top: 1rem;
+        }
+
+        .mt-5 {
+            margin-top: 3rem;
+        }
+    </style>
 </head>
-<body class="bg-light">
+<body>
 
-    <div class="container mt-5">
-        <div class="card" id="ProfileCard">
-            <div class="card-body text-center">
-                <img src="https://via.placeholder.com/150" alt="Imagem de Perfil" id="profileImage" class="rounded-circle mb-3" style="width: 150px;">
-                <h3 id="profileName">Nome: Meu Perfil</h3>
-                <p id="profileAge">Idade: 18</p>
+<div class="container mt-5">
+    <div class="card" id="profileCard">
+        <div class="card-body text-center">
+            <img 
+                src="https://via.placeholder.com/150" 
+                alt="Imagem de Perfil" 
+                id="profileImage" 
+                class="rounded-circle mb-3"
+                onclick="alterarImagem()"
+            >
+            <h3 id="profileName">Nome: Meu perfil</h3>
+            <p id="profileAge">Idade: 18</p>
 
-                <h5>Hobbies:</h5>
-                <ul id="hobbiesList" class="list-group mb-3">
-                    <li class="list-group-item">Leitura</li>
-                    <li class="list-group-item">Esportes</li>
-                    <li class="list-group-item">Música</li>
-                </ul>
-                <button class="btn btn-primary me-2" onclick="alterarNome()">Alterar Nome</button>
-                <button class="btn btn-success me-2" onclick="adicionarHobby()">Adicionar Hobby</button>
-                <button class="btn btn-warning me-2" onclick="mudarCorDeFundo()">Mudar Cor de Fundo</button>
+            <h5>Hobbies</h5>
+            <ul id="hobbiesList" class="list-group mb-3">
+                <li class="list-group-item" onclick="removerHobby(this)">Leitura</li>
+                <li class="list-group-item" onclick="removerHobby(this)">Esportes</li>
+                <li class="list-group-item" onclick="removerHobby(this)">Música</li>
+            </ul>
+
+            <div class="d-flex justify-content-center flex-wrap">
+                <button class="btn btn-primary me-2 mb-2" onclick="alterarNome()">Alterar nome</button>
+                <button class="btn btn-secondary me-2 mb-2" onclick="alterarIdade()">Alterar idade</button>
+                <button class="btn btn-success me-2 mb-2" onclick="adicionarHobby()">Adicionar hobby</button>
+                <button class="btn btn-warning me-2 mb-2" onclick="mudarCorDeFundo()">Mudar cor de fundo</button>
+                <button class="btn btn-info me-2 mb-2" onclick="abrirSelecaoImagem()">Alterar imagem de perfil</button>
+                <button class="btn btn-danger mb-2" onclick="resetarPerfil()">Resetar perfil</button>
             </div>
         </div>
     </div>
-    
-    <script>
-        function alterarNome(){
-            const novoNome= prompt("Digite o novo nome:");
-            if(novoNome){
-                document.getElementById("ProfileName").textContent="Nome:"+ novoNome;
+</div>
+
+<script>
+    // Variáveis com os valores iniciais
+    const nomeOriginal = "Meu perfil";
+    const idadeOriginal = 18;
+    const imagemOriginal = "https://via.placeholder.com/150"; // URL da imagem original
+    const hobbiesIniciais = ["Leitura", "Esportes", "Música"]; // Hobbies iniciais
+
+    // Função para alterar o nome do perfil
+    function alterarNome() {
+        const novoNome = prompt("Digite o novo nome:");
+        if (novoNome) {
+            document.getElementById("profileName").textContent = "Nome: " + novoNome;
+        }
+    }
+
+    // Função para alterar a idade do perfil
+    function alterarIdade() {
+        const novaIdade = prompt("Digite a nova idade:");
+        if (novaIdade && !isNaN(novaIdade)) {
+            document.getElementById("profileAge").textContent = "Idade: " + novaIdade;
+        } else {
+            alert("Por favor, insira uma idade válida.");
+        }
+    }
+
+    // Função para adicionar um novo hobby
+    function adicionarHobby() {
+        const novoHobby = prompt("Digite um novo hobby:");
+        if (novoHobby) {
+            const li = document.createElement("li");
+            li.textContent = novoHobby;
+            li.className = "list-group-item";
+            li.onclick = function () { removerHobby(li); }; // Adiciona a função de remover
+            document.getElementById("hobbiesList").appendChild(li);
+        }
+    }
+
+    // Função para remover um hobby
+    function removerHobby(hobbyElement) {
+        hobbyElement.remove(); // Remove o hobby ao clicar
+    }
+
+    // Função para mudar a cor de fundo do card
+    function mudarCorDeFundo() {
+        const cores = ["#f8d7da", "#f1a7c1", "#f4c2c2", "#e6a0c4"];
+        const corAleatoria = cores[Math.floor(Math.random() * cores.length)];
+        document.getElementById("profileCard").style.backgroundColor = corAleatoria;
+    }
+
+    // Função para alterar a imagem de perfil (permite alternar entre duas imagens)
+    function alterarImagem() {
+        const imagem = document.getElementById("profileImage");
+        
+        // Verifica se a imagem já foi alterada para a nova, se sim, volta à imagem original
+        if (imagem.src === "https://via.placeholder.com/150/0000FF/FFFFFF?Text=Nova+Imagem") {
+            imagem.src = "https://via.placeholder.com/150"; // Imagem original
+        } else {
+            imagem.src = "https://via.placeholder.com/150/0000FF/FFFFFF?Text=Nova+Imagem"; // Nova imagem
+        }
+    }
+
+    // Função para abrir o seletor de arquivos de imagem
+    function abrirSelecaoImagem() {
+        document.getElementById("fileInput").click(); // Aciona o clique no input de arquivo
+    }
+
+    // Função para alterar a imagem de perfil com a imagem escolhida
+    function alterarImagemDePerfil(event) {
+        const file = event.target.files[0]; // Obtém o arquivo selecionado
+        if (file) {
+            const reader = new FileReader(); // Cria um objeto FileReader
+
+            // Quando a imagem for carregada, alteramos a imagem de perfil
+            reader.onload = function(e) {
+                const imagem = document.getElementById("profileImage");
+                imagem.src = e.target.result; // Define o src da imagem para o arquivo selecionado
             }
-        }
 
-        function adicionarHobby(){
-            const novoHobby= prompt("Digite um novo hobbie:");
-            if(novoHobby){
-                const li=document.createElement("li");
-                li.textContent= novoHobby;
-                li.className="list-group-item";
-                document.getElementById("hobbiesList").appendChild(li);
-            }
+            // Lê o arquivo como uma URL de dados
+            reader.readAsDataURL(file);
         }
+    }
 
-        function mudarCorDeFundo(){
-            const cores=["#f8d7da", "#d1ecf1", "#d4edda", "#fff3cd", "#cce5ff"];
-            const corAleatoria= cores[Math.floor(Math.random()*cores.length)];
-            document.getElementById("profileCard").style.backgroundColor= corAleatoria;
-        }
-    </script>
+    // Função para resetar o perfil ao estado original
+    function resetarPerfil() {
+        // Restaurando os valores iniciais
+        document.getElementById("profileName").textContent = "Nome: " + nomeOriginal;
+        document.getElementById("profileAge").textContent = "Idade: " + idadeOriginal;
+        document.getElementById("profileImage").src = imagemOriginal; // Restaurando a imagem original
+        
+        // Limpar hobbies e restaurar os hobbies iniciais
+        const hobbiesList = document.getElementById("hobbiesList");
+        hobbiesList.innerHTML = ""; // Limpa a lista de hobbies
+        hobbiesIniciais.forEach(hobby => {
+            const li = document.createElement("li");
+            li.textContent = hobby;
+            li.className = "list-group-item";
+            li.onclick = function () { removerHobby(li); }; // Adiciona a função de remover
+            hobbiesList.appendChild(li);
+        });
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        // Resetando a cor de fundo do card
+        document.getElementById("profileCard").style.backgroundColor = "";
+    }
+</script>
+
+<!-- JS do Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
