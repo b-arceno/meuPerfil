@@ -169,83 +169,83 @@
 
 <script>
     // Variáveis com os valores iniciais
-    const nomeOriginal = "Meu perfil";
-    const idadeOriginal = 18;
-    const imagemOriginal = "https://via.placeholder.com/150"; // URL da imagem original
-    const hobbiesIniciais = ["Leitura", "Esportes", "Música"]; // Hobbies iniciais
+    const nomeOriginal = "Meu perfil"; // Define o nome original do perfil
+    const idadeOriginal = 18; // Define a idade original do perfil
+    const imagemOriginal = "https://via.placeholder.com/150"; // URL da imagem original do perfil
+    const hobbiesIniciais = ["Leitura", "Esportes", "Música"]; // Lista de hobbies iniciais
 
     // Função para alterar o nome do perfil
     function alterarNome() {
-        const novoNome = prompt("Digite o novo nome:");
-        if (novoNome) {
-            document.getElementById("profileName").textContent = "Nome: " + novoNome;
+        const novoNome = prompt("Digite o novo nome:"); // Solicita ao usuário um novo nome
+        if (novoNome) { // Verifica se o usuário digitou algo
+            document.getElementById("profileName").textContent = "Nome: " + novoNome; // Altera o nome no HTML
         }
     }
 
     // Função para alterar a idade do perfil
     function alterarIdade() {
-        const novaIdade = prompt("Digite a nova idade:");
-        if (novaIdade && !isNaN(novaIdade)) {
-            document.getElementById("profileAge").textContent = "Idade: " + novaIdade;
+        const novaIdade = prompt("Digite a nova idade:"); // Solicita ao usuário uma nova idade
+        if (novaIdade && !isNaN(novaIdade)) { // Verifica se a idade digitada é válida
+            document.getElementById("profileAge").textContent = "Idade: " + novaIdade; // Altera a idade no HTML
         } else {
-            alert("Por favor, insira uma idade válida.");
+            alert("Por favor, insira uma idade válida."); // Exibe um alerta caso a idade não seja válida
         }
     }
 
     // Função para adicionar um novo hobby
     function adicionarHobby() {
-        const novoHobby = prompt("Digite um novo hobby:");
-        if (novoHobby) {
-            const li = document.createElement("li");
-            li.textContent = novoHobby;
-            li.className = "list-group-item";
-            li.onclick = function () { removerHobby(li); }; // Adiciona a função de remover
-            document.getElementById("hobbiesList").appendChild(li);
+        const novoHobby = prompt("Digite um novo hobby:"); // Solicita ao usuário um novo hobby
+        if (novoHobby) { // Verifica se o usuário digitou algo
+            const li = document.createElement("li"); // Cria um novo item de lista (li)
+            li.textContent = novoHobby; // Define o texto do item com o hobby digitado
+            li.className = "list-group-item"; // Adiciona a classe de estilo para o item da lista
+            li.onclick = function () { removerHobby(li); }; // Define a função de remoção ao clicar no hobby
+            document.getElementById("hobbiesList").appendChild(li); // Adiciona o novo hobby na lista de hobbies
         }
     }
 
     // Função para remover um hobby
     function removerHobby(hobbyElement) {
-        hobbyElement.remove(); // Remove o hobby ao clicar
+        hobbyElement.remove(); // Remove o elemento de hobby do DOM quando clicado
     }
 
     // Função para mudar a cor de fundo do card
     function mudarCorDeFundo() {
-        const cores = ["#f8d7da", "#f1a7c1", "#f4c2c2", "#e6a0c4"];
-        const corAleatoria = cores[Math.floor(Math.random() * cores.length)];
-        document.getElementById("profileCard").style.backgroundColor = corAleatoria;
+        const cores = ["#f8d7da", "#f1a7c1", "#f4c2c2", "#e6a0c4"]; // Define um array com algumas cores
+        const corAleatoria = cores[Math.floor(Math.random() * cores.length)]; // Escolhe uma cor aleatória do array
+        document.getElementById("profileCard").style.backgroundColor = corAleatoria; // Altera a cor de fundo do card
     }
 
     // Função para alterar a imagem de perfil (permite alternar entre duas imagens)
     function alterarImagem() {
-        const imagem = document.getElementById("profileImage");
+        const imagem = document.getElementById("profileImage"); // Obtém o elemento de imagem do perfil
         
-        // Verifica se a imagem já foi alterada para a nova, se sim, volta à imagem original
+        // Verifica se a imagem foi alterada para a nova, se sim, volta à imagem original
         if (imagem.src === "https://via.placeholder.com/150/0000FF/FFFFFF?Text=Nova+Imagem") {
-            imagem.src = "https://via.placeholder.com/150"; // Imagem original
+            imagem.src = "https://via.placeholder.com/150"; // Volta à imagem original
         } else {
-            imagem.src = "https://via.placeholder.com/150/0000FF/FFFFFF?Text=Nova+Imagem"; // Nova imagem
+            imagem.src = "https://via.placeholder.com/150/0000FF/FFFFFF?Text=Nova+Imagem"; // Altera para a nova imagem
         }
     }
 
     // Função para abrir o seletor de arquivos de imagem
     function abrirSelecaoImagem() {
-        document.getElementById("fileInput").click(); // Aciona o clique no input de arquivo
+        document.getElementById("fileInput").click(); // Aciona o clique no input de arquivo, abrindo o seletor
     }
 
     // Função para alterar a imagem de perfil com a imagem escolhida
     function alterarImagemDePerfil(event) {
-        const file = event.target.files[0]; // Obtém o arquivo selecionado
-        if (file) {
-            const reader = new FileReader(); // Cria um objeto FileReader
+        const file = event.target.files[0]; // Obtém o primeiro arquivo selecionado
+        if (file) { // Verifica se um arquivo foi selecionado
+            const reader = new FileReader(); // Cria um objeto FileReader para ler o arquivo
 
             // Quando a imagem for carregada, alteramos a imagem de perfil
             reader.onload = function(e) {
-                const imagem = document.getElementById("profileImage");
+                const imagem = document.getElementById("profileImage"); // Obtém o elemento de imagem
                 imagem.src = e.target.result; // Define o src da imagem para o arquivo selecionado
             }
 
-            // Lê o arquivo como uma URL de dados
+            // Lê o arquivo como uma URL de dados (para exibição no navegador)
             reader.readAsDataURL(file);
         }
     }
@@ -253,23 +253,23 @@
     // Função para resetar o perfil ao estado original
     function resetarPerfil() {
         // Restaurando os valores iniciais
-        document.getElementById("profileName").textContent = "Nome: " + nomeOriginal;
-        document.getElementById("profileAge").textContent = "Idade: " + idadeOriginal;
-        document.getElementById("profileImage").src = imagemOriginal; // Restaurando a imagem original
+        document.getElementById("profileName").textContent = "Nome: " + nomeOriginal; // Restaura o nome original
+        document.getElementById("profileAge").textContent = "Idade: " + idadeOriginal; // Restaura a idade original
+        document.getElementById("profileImage").src = imagemOriginal; // Restaura a imagem original
         
         // Limpar hobbies e restaurar os hobbies iniciais
-        const hobbiesList = document.getElementById("hobbiesList");
+        const hobbiesList = document.getElementById("hobbiesList"); // Obtém o elemento da lista de hobbies
         hobbiesList.innerHTML = ""; // Limpa a lista de hobbies
-        hobbiesIniciais.forEach(hobby => {
-            const li = document.createElement("li");
-            li.textContent = hobby;
-            li.className = "list-group-item";
-            li.onclick = function () { removerHobby(li); }; // Adiciona a função de remover
-            hobbiesList.appendChild(li);
+        hobbiesIniciais.forEach(hobby => { // Para cada hobby inicial
+            const li = document.createElement("li"); // Cria um novo item de lista (li)
+            li.textContent = hobby; // Define o texto do item com o hobby
+            li.className = "list-group-item"; // Adiciona a classe de estilo para o item da lista
+            li.onclick = function () { removerHobby(li); }; // Adiciona a função de remover ao clicar
+            hobbiesList.appendChild(li); // Adiciona o hobby à lista
         });
 
         // Resetando a cor de fundo do card
-        document.getElementById("profileCard").style.backgroundColor = "";
+        document.getElementById("profileCard").style.backgroundColor = ""; // Restaura a cor de fundo para o valor padrão
     }
 </script>
 
