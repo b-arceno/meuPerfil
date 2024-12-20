@@ -233,22 +233,13 @@
         document.getElementById("fileInput").click(); // Aciona o clique no input de arquivo, abrindo o seletor
     }
 
-    // Função para alterar a imagem de perfil com a imagem escolhida
-    function alterarImagemDePerfil(event) {
-        const file = event.target.files[0]; // Obtém o primeiro arquivo selecionado
-        if (file) { // Verifica se um arquivo foi selecionado
-            const reader = new FileReader(); // Cria um objeto FileReader para ler o arquivo
-
-            // Quando a imagem for carregada, alteramos a imagem de perfil
-            reader.onload = function(e) {
-                const imagem = document.getElementById("profileImage"); // Obtém o elemento de imagem
-                imagem.src = e.target.result; // Define o src da imagem para o arquivo selecionado
+    // Função para alterar a imagem
+    function alterarImagemDePerfil() {
+            const novaURL = prompt("Digite a URL da nova imagem:"); // Solicita a URL da imagem
+            if (novaURL) { // Verifica se o usuário inseriu uma URL
+                document.getElementById("profileImage").src = novaURL; // Atualiza o src da imagem
             }
-
-            // Lê o arquivo como uma URL de dados (para exibição no navegador)
-            reader.readAsDataURL(file);
         }
-    }
 
     // Função para resetar o perfil ao estado original
     function resetarPerfil() {
